@@ -40,7 +40,7 @@
 
         h1, h2, h3, h4, .brand { font-family: var(--font-head); }
 
-        /* --- Navigation --- */
+        /* Navigation */
         .nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 18px 40px; background: rgba(5, 7, 10, 0.85);
@@ -55,7 +55,7 @@
         .nav .links a:hover { color: var(--neon-green); text-shadow: 0 0 8px rgba(0,255,102,0.6); }
         @media (max-width: 640px) { .nav .links { display: none; } .nav { padding: 16px 20px; } }
 
-        /* --- Hero Section --- */
+        /* Hero Section */
         .hero {
             text-align: center; padding: 60px 20px 40px; position: relative;
         }
@@ -95,7 +95,7 @@
         .hero .tagline .dot { width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- Countdown Timer Component --- */
+        /* Countdown Timer Component */
         .timer-container {
             max-width: 620px; margin: 32px auto 0; background: var(--surface-card);
             border: 1px solid var(--surface-border); border-radius: 20px; padding: 24px 20px;
@@ -127,7 +127,7 @@
         }
         .hero .sub strong { color: #ffffff; font-weight: 600; }
 
-        /* --- Contract Bar --- */
+        /* Contract Bar */
         .contract-wrapper { max-width: 580px; margin: 28px auto 0; text-align: center; }
         .contract-bar {
             background: rgba(15, 23, 18, 0.8);
@@ -148,7 +148,7 @@
         }
         .solscan-link:hover { text-decoration: underline; text-shadow: 0 0 8px rgba(0, 255, 102, 0.5); }
 
-        /* --- Layout Containers --- */
+        /* Layout Containers */
         .container { max-width: 1040px; margin: 0 auto; padding: 60px 20px; }
         .section-title {
             font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; text-transform: uppercase;
@@ -156,7 +156,7 @@
         }
         .section-title span { color: var(--neon-green); text-shadow: 0 0 12px rgba(0, 255, 102, 0.3); }
 
-        /* --- Tokenomics Section --- */
+        /* Tokenomics Section */
         .tokenomics-card {
             background: var(--surface-card); border: 1px solid var(--surface-border);
             border-radius: 20px; padding: 36px 30px; backdrop-filter: blur(12px);
@@ -178,7 +178,7 @@
         .dot-green { background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
         .dot-red { background: #ef4444; }
 
-        /* --- Stats Grid --- */
+        /* Stats Grid */
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
         @media (max-width: 768px) { .stats { grid-template-columns: 1fr; } }
         .stat {
@@ -196,7 +196,7 @@
         .stat .num { font-size: 2.5rem; font-weight: 800; color: #fff; font-family: var(--font-head); line-height: 1; }
         .stat .label { font-size: 0.85rem; color: var(--neon-green); font-weight: 700; margin-top: 8px; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* --- Dev Commitment Banner --- */
+        /* Dev Commitment Banner */
         .promise {
             background: linear-gradient(135deg, rgba(0, 255, 102, 0.05) 0%, rgba(10, 15, 12, 0.8) 100%);
             border: 1px solid var(--surface-border); border-radius: 24px;
@@ -206,7 +206,7 @@
         .promise p { color: #d1d5db; font-size: 1.05rem; line-height: 1.8; }
         .promise p strong { color: #ffffff; }
 
-        /* --- Principles --- */
+        /* Principles */
         .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
         @media (max-width: 640px) { .principles { grid-template-columns: 1fr; } }
         .principle {
@@ -218,7 +218,7 @@
         .principle h4 { font-size: 1.15rem; margin-bottom: 8px; color: #fff; font-weight: 700; }
         .principle p { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; }
 
-        /* --- Roadmap --- */
+        /* Roadmap */
         .roadmap { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
         .milestone {
             display: flex; gap: 24px; padding: 28px; background: var(--surface-card);
@@ -233,7 +233,7 @@
         .milestone h4 { font-size: 1.1rem; margin-bottom: 6px; color: #fff; }
         .milestone p { font-size: 0.92rem; color: var(--text-sub); }
 
-        /* --- Accordion FAQ Section --- */
+        /* Accordion FAQ Section */
         .faq-list { display: flex; flex-direction: column; gap: 14px; }
         .faq-item {
             background: var(--surface-card); border: 1px solid var(--surface-border);
@@ -251,7 +251,7 @@
         }
         .faq-item.active .faq-answer { display: block; }
 
-        /* --- CTA --- */
+        /* CTA */
         .cta {
             text-align: center; background: radial-gradient(circle at center, rgba(0, 255, 102, 0.15) 0%, rgba(5, 7, 10, 0.95) 80%);
             border: 1px solid rgba(0, 255, 102, 0.3); border-radius: 28px;
@@ -271,7 +271,7 @@
         .cta .ghost { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
         .cta .ghost:hover { border-color: var(--neon-green); color: var(--neon-green); background: rgba(0, 255, 102, 0.05); transform: translateY(-3px); }
 
-        /* --- Footer --- */
+        /* Footer */
         .footer {
             border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 40px 20px; text-align: center;
             color: #6b7280; font-size: 0.85rem; background: #020305;
@@ -279,7 +279,7 @@
         .footer a { color: var(--text-sub); text-decoration: none; transition: 0.2s; }
         .footer a:hover { color: var(--neon-green); }
 
-        /* --- Animations --- */
+        /* Animations */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
         .fade-in { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; } .d3 { animation-delay: 0.3s; }
@@ -321,7 +321,7 @@
             Launched transparently using standard Pump.fun protocol tools.
         </p>
 
-        <!-- Interactive Contract Bar & Solscan Verification -->
+        <!-- Interactive Contract Bar -->
         <div class="contract-wrapper fade-in d3">
             <div class="contract-bar">
                 <span class="address" id="ca">Contract: Pending Deployment...</span>
@@ -503,10 +503,40 @@
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const seconds = Math.floorIt depends on **what** you're building, but in almost all web, mobile, and software development, a basic timer relies on your system/device clock and **does not require a back-end**. 
 
-It looks like we're starting a new turn without the previous code context! 
+If your timer isn't working, it’s usually due to a front-end logic bug rather than a missing server component.
 
-Could you quickly paste the current contents of your `index.html` file (or let me know what feature/widget/fix you'd like added)? 
+---
 
-Once you paste it here, I'll merge the fix directly into the full, ready-to-upload `index.html` file for you right away.
+## 1. When You DO NOT Need a Back-End
+If you are building a straightforward stopwatch, countdown timer, or interval timer (like a pomodoro or workout timer), it should run entirely on the client side using JavaScript, Python, Swift, or whatever UI framework you are using.
+
+* **How it works:** Front-end timers use built-in browser/OS timing methods (like JavaScript's `setInterval()` or `requestAnimationFrame()`) or compare timestamp differences (`Date.now() - startTime`).
+* **Why yours might be failing:**
+  * **Tab Throttling / Inactivity:** Browsers intentionally throttle or freeze `setInterval()` and `setTimeout()` when a user switches tabs or minimizes the window to save CPU/battery.
+  * **State Management Bugs:** In frameworks like React or Vue, missing dependencies in `useEffect` or stale state closures can cause timers to freeze or fail to update the display.
+  * **Missing Start Trigger:** The function updating the display state isn't actually being called or re-rendered.
+
+---
+
+## 2. When You DO Need a Back-End
+You only need server-side logic for a timer under specific circumstances:
+
+* **Security / Anti-Cheat:** If it’s an online exam, a timed auction, or a game where a user could cheat by changing their local system clock forward or backward.
+* **Persistence Across Sessions:** If a countdown needs to keep running even if the user closes their browser, turns off their device, or logs in from a different computer.
+* **Synchronization:** If multiple users need to see the exact same timer synced in real time (e.g., a live sports clock or a multiplayer lobby countdown).
+
+> **The Fix for Persistent/Synced Timers:** The back-end doesn't actively "run" a clock ticking every second. Instead, the server stores a single **target timestamp** (e.g., `ends_at: 2026-08-16T19:00:00Z`). Your front-end simply calculates: `Remaining Time = Target Time - Current Time`.
+
+---
+
+## How to Fix It
+If you want to troubleshoot why it's not working, check the following in your code:
+
+1. **Calculate deltas instead of incrementing numbers:** 
+   * *Bad approach:* Adding `1` every 1000ms using `setInterval`. (It will drift or get paused by the OS).
+   * *Good approach:* Save `startTime = Date.now()`, then every tick calculate `elapsed = Date.now() - startTime`.
+2. **Check your console:** Look for uncaught JavaScript errors that might be breaking the execution loop.
+
+If you share the snippet of code you're using or the framework you're building in (e.g., vanilla JS, React, Python, HTML/CSS), I can spot the bug for you!
