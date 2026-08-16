@@ -503,40 +503,17 @@
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floorIt depends on **what** you're building, but in almost all web, mobile, and software development, a basic timer relies on your system/device clock and **does not require a back-end**. 
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-If your timer isn't working, it’s usually due to a front-end logic bug rather than a missing server component.
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
 
----
-
-## 1. When You DO NOT Need a Back-End
-If you are building a straightforward stopwatch, countdown timer, or interval timer (like a pomodoro or workout timer), it should run entirely on the client side using JavaScript, Python, Swift, or whatever UI framework you are using.
-
-* **How it works:** Front-end timers use built-in browser/OS timing methods (like JavaScript's `setInterval()` or `requestAnimationFrame()`) or compare timestamp differences (`Date.now() - startTime`).
-* **Why yours might be failing:**
-  * **Tab Throttling / Inactivity:** Browsers intentionally throttle or freeze `setInterval()` and `setTimeout()` when a user switches tabs or minimizes the window to save CPU/battery.
-  * **State Management Bugs:** In frameworks like React or Vue, missing dependencies in `useEffect` or stale state closures can cause timers to freeze or fail to update the display.
-  * **Missing Start Trigger:** The function updating the display state isn't actually being called or re-rendered.
-
----
-
-## 2. When You DO Need a Back-End
-You only need server-side logic for a timer under specific circumstances:
-
-* **Security / Anti-Cheat:** If it’s an online exam, a timed auction, or a game where a user could cheat by changing their local system clock forward or backward.
-* **Persistence Across Sessions:** If a countdown needs to keep running even if the user closes their browser, turns off their device, or logs in from a different computer.
-* **Synchronization:** If multiple users need to see the exact same timer synced in real time (e.g., a live sports clock or a multiplayer lobby countdown).
-
-> **The Fix for Persistent/Synced Timers:** The back-end doesn't actively "run" a clock ticking every second. Instead, the server stores a single **target timestamp** (e.g., `ends_at: 2026-08-16T19:00:00Z`). Your front-end simply calculates: `Remaining Time = Target Time - Current Time`.
-
----
-
-## How to Fix It
-If you want to troubleshoot why it's not working, check the following in your code:
-
-1. **Calculate deltas instead of incrementing numbers:** 
-   * *Bad approach:* Adding `1` every 1000ms using `setInterval`. (It will drift or get paused by the OS).
-   * *Good approach:* Save `startTime = Date.now()`, then every tick calculate `elapsed = Date.now() - startTime`.
-2. **Check your console:** Look for uncaught JavaScript errors that might be breaking the execution loop.
-
-If you share the snippet of code you're using or the framework you're building in (e.g., vanilla JS, React, Python, HTML/CSS), I can spot the bug for you!
+        // Run immediately and update every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
