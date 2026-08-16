@@ -304,7 +304,7 @@
         <h1 class="fade-in d1">Anchor</h1>
         <div class="tagline fade-in d2"><span class="dot"></span> Fair Launch via Pump.fun</div>
 
-        <!-- Live Countdown Timer -->
+        <!-- Live Countdown Timer Component -->
         <div class="timer-container fade-in d2">
             <div class="timer-title" id="timerStatus">Official Launch Countdown — Sept 6 @ 12:00 PM EST</div>
             <div class="timer-grid">
@@ -468,10 +468,12 @@
         // Contract Copy Helper
         function copyCA() {
             const caText = document.getElementById('ca').innerText.replace('Contract: ', '');
-            navigator.clipboard.writeText(caText);
-            const btn = document.querySelector('.contract-bar button');
-            btn.innerText = 'COPIED!';
-            setTimeout(() => { btn.innerText = 'COPY CA'; }, 2000);
+            if (caText && caText !== 'Pending Deployment...') {
+                navigator.clipboard.writeText(caText);
+                const btn = document.querySelector('.contract-bar button');
+                btn.innerText = 'COPIED!';
+                setTimeout(() => { btn.innerText = 'COPY CA'; }, 2000);
+            }
         }
 
         // Interactive Accordion FAQ
@@ -482,15 +484,14 @@
             });
         });
 
-        // Launch Date Countdown Target: September 6 @ 12:00 PM EST (16:00:00 UTC)
-        const launchDate = new Date("2026-09-06T16:00:00Z").getTime();
+        // Target Date: Sept 6, 2026 @ 12:00 PM EST (17:00:00 UTC)
+        const launchDate = new Date("2026-09-06T17:00:00Z").getTime();
 
-        const timerInterval = setInterval(() => {
+        function updateCountdown() {
             const now = new Date().getTime();
             const distance = launchDate - now;
 
-            if (distance < 0) {
-                clearInterval(timerInterval);
+            if (distance <= 0) {
                 document.getElementById("timerStatus").innerText = "🚨 LAUNCH IS LIVE ON PUMP.FUN! 🚨";
                 document.getElementById("days").innerText = "00";
                 document.getElementById("hours").innerText = "00";
@@ -502,23 +503,10 @@
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * I can't set timers, schedule events, or directly configure systems for you, but here is the exact information and breakdown you need to lock in that date and time:
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-### Launch Details
+It looks like we're starting a new turn without the previous code context! 
 
-* **Target Date:** Sunday, September 6, 2026
-* **Target Time:** 12:00 PM EST (1:00 PM EDT)
-* **ISO 8601 Timestamp:** `2026-09-06T12:00:00-05:00` *(EST / UTC-5)*
-* **ISO 8601 Timestamp (Local EDT):** `2026-09-06T13:00:00-04:00` *(EDT / UTC-4)*
+Could you quickly paste the current contents of your `index.html` file (or let me know what feature/widget/fix you'd like added)? 
 
----
-
-### Time Zone Check
-
-> **Note on Daylight Saving Time:** Early September falls under **Eastern Daylight Time (EDT, UTC-4)** in North America. 
-> * If you strictly mean **12:00 PM EST (UTC-5)**, it corresponds to **1:00 PM local time** on the US East Coast.
-> * If you meant **12:00 PM local East Coast time**, set your system or tool to **12:00 PM EDT**.
-
----
-
-If you are setting this up in a specific platform or tool (like a website launch countdown, CRON job, email scheduler, or calendar event), let me know which one and I can give you the exact code or step-by-step setup!
+Once you paste it here, I'll merge the fix directly into the full, ready-to-upload `index.html` file for you right away.
