@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor — Zero-Dev Allocation Solana Launch</title>
+    <link rel="icon" type="image/svg+xml" href="anchor_logo.png">
+    <meta name="description" content="Anchor: Launched on Pump.fun with 0% dev allocation, 0% pre-mine, and no dev-first buying. Transparency from block one.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #05070a;
+            --surface-card: rgba(18, 25, 20, 0.6);
+            --surface-border: rgba(34, 197, 94, 0.18);
+            --neon-green: #00ff66;
+            --emerald-bright: #22c55e;
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 255, 102, 0.12) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        h1, h2, h3, h4, .brand { font-family: var(--font-head); }
+
+        /* --- Navigation --- */
+        .nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 40px; background: rgba(5, 7, 10, 0.85);
+            backdrop-filter: blur(16px); border-bottom: 1px solid var(--surface-border);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.5px; }
+        .nav .brand img { width: 34px; height: 34px; filter: drop-shadow(0 0 8px var(--neon-green)); }
+        .nav .brand span { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
+        .nav .links { display: flex; gap: 28px; }
+        .nav .links a { color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+        .nav .links a:hover { color: var(--neon-green); text-shadow: 0 0 8px rgba(0,255,102,0.6); }
+        @media (max-width: 640px) { .nav .links { display: none; } .nav { padding: 16px 20px; } }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center; padding: 100px 20px 80px; position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);
+            width: 350px; height: 350px; background: rgba(0, 255, 102, 0.15); filter: blur(120px);
+            border-radius: 50%; pointer-events: none;
+        }
+        .hero .logo-wrap { margin-bottom: 24px; display: inline-block; position: relative; }
+        .hero .logo-wrap img { width: 140px; height: 140px; filter: drop-shadow(0 0 35px rgba(0, 255, 102, 0.4)); animation: float 4s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; letter-spacing: -2px; line-height: 1.05;
+            background: linear-gradient(180deg, #ffffff 30%, var(--neon-green) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+        .hero .tagline {
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+            background: rgba(0, 255, 102, 0.08); padding: 8px 24px; border-radius: 30px;
+            font-size: 0.85rem; font-weight: 700; color: var(--neon-green); border: 1px solid rgba(0, 255, 102, 0.3);
+            letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
+        }
+        .hero .tagline .dot { width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .hero .sub {
+            max-width: 680px; margin: 24px auto 0; color: var(--text-sub);
+            font-size: 1.15rem; line-height: 1.7; font-weight: 400;
+        }
+        .hero .sub strong { color: #ffffff; font-weight: 600; }
+
+        /* --- Contract Bar --- */
+        .contract-bar {
+            max-width: 580px; margin: 32px auto 0; background: rgba(15, 23, 18, 0.8);
+            border: 1px solid var(--surface-border); border-radius: 12px; padding: 12px 18px;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+        }
+        .contract-bar .address { font-family: monospace; color: var(--text-sub); font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .contract-bar button {
+            background: rgba(0, 255, 102, 0.15); color: var(--neon-green); border: 1px solid rgba(0, 255, 102, 0.4);
+            padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
+            transition: 0.2s; white-space: nowrap; font-family: var(--font-head);
+        }
+        .contract-bar button:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 12px rgba(0, 255, 102, 0.5); }
+
+        /* --- Layout Containers --- */
+        .container { max-width: 1040px; margin: 0 auto; padding: 70px 20px; }
+        .section-title {
+            font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; text-transform: uppercase;
+            text-align: center; margin-bottom: 48px; position: relative;
+        }
+        .section-title span { color: var(--neon-green); text-shadow: 0 0 12px rgba(0, 255, 102, 0.3); }
+
+        /* --- Stats Grid --- */
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 768px) { .stats { grid-template-columns: 1fr; } }
+        .stat {
+            background: var(--surface-card); border: 1px solid var(--surface-border);
+            border-radius: 20px; padding: 36px 24px; text-align: center; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden; backdrop-filter: blur(12px);
+        }
+        .stat::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-green), transparent); opacity: 0; transition: 0.3s;
+        }
+        .stat:hover { border-color: rgba(0, 255, 102, 0.5); transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); }
+        .stat:hover::before { opacity: 1; }
+        .stat .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .stat .num { font-size: 2.5rem; font-weight: 800; color: #fff; font-family: var(--font-head); line-height: 1; }
+        .stat .label { font-size: 0.85rem; color: var(--neon-green); font-weight: 700; margin-top: 8px; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* --- Promise Banner --- */
+        .promise {
+            background: linear-gradient(135deg, rgba(0, 255, 102, 0.05) 0%, rgba(10, 15, 12, 0.8) 100%);
+            border: 1px solid var(--surface-border); border-radius: 24px;
+            padding: 48px 40px; margin-top: 20px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .promise h3 { color: var(--neon-green); font-size: 1.4rem; margin-bottom: 18px; text-transform: uppercase; letter-spacing: -0.5px; }
+        .promise p { color: #d1d5db; font-size: 1.05rem; line-height: 1.8; }
+        .promise p strong { color: #ffffff; }
+
+        /* --- Core Principles --- */
+        .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+        @media (max-width: 640px) { .principles { grid-template-columns: 1fr; } }
+        .principle {
+            background: var(--surface-card); border: 1px solid var(--surface-border); border-radius: 20px;
+            padding: 30px; transition: 0.3s; backdrop-filter: blur(12px);
+        }
+        .principle:hover { border-color: rgba(0, 255, 102, 0.4); transform: translateY(-3px); }
+        .principle .icon { font-size: 2rem; margin-bottom: 12px; }
+        .principle h4 { font-size: 1.15rem; margin-bottom: 8px; color: #fff; font-weight: 700; }
+        .principle p { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; }
+
+        /* --- Modern Timeline Roadmap --- */
+        .roadmap { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+        .milestone {
+            display: flex; gap: 24px; padding: 28px; background: var(--surface-card);
+            border: 1px solid var(--surface-border); border-radius: 18px; transition: 0.3s; align-items: flex-start;
+        }
+        .milestone:hover { border-color: rgba(0, 255, 102, 0.4); }
+        .milestone .phase {
+            font-family: var(--font-head); font-size: 0.8rem; color: var(--neon-green); font-weight: 800;
+            letter-spacing: 1.5px; background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.2);
+            padding: 6px 14px; border-radius: 20px; white-space: nowrap;
+        }
+        .milestone h4 { font-size: 1.1rem; margin-bottom: 6px; color: #fff; }
+        .milestone p { font-size: 0.92rem; color: var(--text-sub); }
+
+        /* --- Aggressive CTA --- */
+        .cta {
+            text-align: center; background: radial-gradient(circle at center, rgba(0, 255, 102, 0.15) 0%, rgba(5, 7, 10, 0.95) 80%);
+            border: 1px solid rgba(0, 255, 102, 0.3); border-radius: 28px;
+            padding: 64px 32px; margin-top: 40px; box-shadow: 0 0 50px rgba(0,255,102,0.08);
+        }
+        .cta h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 14px; text-transform: uppercase; letter-spacing: -1px; }
+        .cta p { color: var(--text-sub); margin-bottom: 32px; max-width: 540px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
+        .cta .buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta a {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 16px 42px; border-radius: 12px; font-weight: 800; font-size: 1rem;
+            text-decoration: none; transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .cta .primary { background: var(--neon-green); color: #000; box-shadow: 0 0 24px rgba(0, 255, 102, 0.4); }
+        .cta .primary:hover { background: #33ff85; transform: translateY(-3px) scale(1.02); box-shadow: 0 0 35px rgba(0, 255, 102, 0.6); }
+        .cta .ghost { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
+        .cta .ghost:hover { border-color: var(--neon-green); color: var(--neon-green); background: rgba(0, 255, 102, 0.05); transform: translateY(-3px); }
+
+        /* --- Footer --- */
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 40px 20px; text-align: center;
+            color: #6b7280; font-size: 0.85rem; background: #020305;
+        }
+        .footer a { color: var(--text-sub); text-decoration: none; transition: 0.2s; }
+        .footer a:hover { color: var(--neon-green); }
+
+        /* --- Animations --- */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+        .fade-in { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; } .d3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="brand"><img src="anchor_logo.png" alt="Anchor logo"><span>ANCHOR</span></div>
+        <div class="links">
+            <a href="#why">WHY</a>
+            <a href="#promise">PROMISE</a>
+            <a href="#principles">PRINCIPLES</a>
+            <a href="#roadmap">ROADMAP</a>
+            <a href="#join">JOIN</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="logo-wrap fade-in"><img src="anchor_logo.png" alt="Anchor logo"></div>
+        <h1 class="fade-in d1">Anchor</h1>
+        <div class="tagline fade-in d2"><span class="dot"></span> Fair Launch via Pump.fun</div>
+        <p class="sub fade-in d3">
+            Zero dev allocations. Zero insider snipes.<br>
+            <strong>I take no team tokens, buy no early supply, and hold zero unfair advantage.</strong><br>
+            Launched transparently using standard Pump.fun protocol tools.
+        </p>
+
+        <!-- Interactive Contract Bar -->
+        <div class="contract-bar fade-in d3">
+            <span class="address" id="ca">Contract: 0x0000000000000000000000000000000000000000</span>
+            <button onclick="copyCA()">COPY CA</button>
+        </div>
+    </div>
+
+    <div class="container" id="why">
+        <h2 class="section-title fade-in">The <span>Launch Rules</span></h2>
+        <div class="stats fade-in">
+            <div class="stat">
+                <div class="icon">🚫</div>
+                <div class="num">0%</div>
+                <div class="label">Dev Allocation</div>
+            </div>
+            <div class="stat">
+                <div class="icon">⏳</div>
+                <div class="num">100%</div>
+                <div class="label">Public First Entry</div>
+            </div>
+            <div class="stat">
+                <div class="icon">🚀</div>
+                <div class="num">Pump.fun</div>
+                <div class="label">Fair Protocol Engine</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="promise">
+        <h2 class="section-title fade-in">The <span>Dev Commitment</span></h2>
+        <div class="promise fade-in">
+            <h3>Straight Transparency</h3>
+            <p>
+                Anchor is deployed via <strong>Pump.fun's standard token launch tooling</strong>. I did not write custom smart contracts, nor do I claim to hold special protocol backdoors or mathematical locks.
+                <br><br>
+                <strong>My commitment as dev is personal, simple, and strict:</strong>
+                <br>
+                1. <strong>Zero Dev Bags:</strong> I take 0% initial token allocation at creation.
+                <br>
+                2. <strong>No Front-Running:</strong> I will NOT buy the first or second transaction slot on launch. I only buy in after the public has entered open market trading.
+                <br>
+                3. <strong>Zero Dev Rugging:</strong> I personally will never dump team supply on holders, because I hold no privileged team supply.
+                <br><br>
+                Market prices fluctuate based on open market trading, but <strong>you will never be rugged by the person who created this token</strong>.
+            </p>
+        </div>
+    </div>
+
+    <div class="container" id="principles">
+        <h2 class="section-title fade-in">Core <span>Principles</span></h2>
+        <div class="principles fade-in">
+            <div class="principle"><div class="icon">🤝</div><h4>Honest Launch</h4><p>Deployed via Pump.fun. No custom contract tricks, no hidden mint controls.</p></div>
+            <div class="principle"><div class="icon">⚖️</div><h4>Equal Opportunity</h4><p>I buy in on the exact same terms as any regular community trader.</p></div>
+            <div class="principle"><div class="icon">👥</div><h4>Community Driven</h4><p>The organic volume and market interest determine where Anchor travels.</p></div>
+            <div class="principle"><div class="icon">📢</div><h4>Open Communication</h4><p>Clear line of sight with the creator across Telegram and X from day one.</p></div>
+        </div>
+    </div>
+
+    <div class="container" id="roadmap">
+        <h2 class="section-title fade-in">Execution <span>Roadmap</span></h2>
+        <div class="roadmap fade-in">
+            <div class="milestone">
+                <div class="phase">PHASE 01</div>
+                <div><h4>Community Build</h4><p>Setup Telegram, establish social channels, and rally community interest ahead of launch.</p></div>
+            </div>
+            <div class="milestone">
+                <div class="phase">PHASE 02</div>
+                <div><h4>Pump.fun Deployment</h4><p>Token created on Pump.fun with 0% dev allocation. Fair bonding curve active for everyone.</p></div>
+            </div>
+            <div class="milestone">
+                <div class="phase">PHASE 03</div>
+                <div><h4>Bonding & Raydium Migration</h4><p>Pushing bonding curve progression together toward auto-liquidity locking on Raydium.</p></div>
+            </div>
+            <div class="milestone">
+                <div class="phase">PHASE 04</div>
+                <div><h4>Community Growth</h4><p>Ongoing engagement, meme creation, transparency reports, and organic reach.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="join">
+        <div class="cta fade-in">
+            <h2>Join Before Launch.</h2>
+            <p>Enter the community Telegram for live launch alerts, CA posting, and open dev Q&A.</p>
+            <div class="buttons">
+                <a class="primary" href="https://t.me/+PdzuklFUoqQ1M2Vh" target="_blank">Join Telegram</a>
+                <a class="ghost" href="https://x.com/AnchorToken26" target="_blank">Follow On X</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Anchor — Steady transparency from block one.</p>
+        <p style="margin-top:6px;">Not financial advice. Meme asset on Solana via Pump.fun. Trade at your own risk.</p>
+    </div>
+
+    <script>
+        function copyCA() {
+            const caText = "0x0000000000000000000000000000000000000000";
+            navigator.clipboard.writeText(caText);
+            const btn = document.querySelector('.contract-bar button');
+            btn.innerText = 'COPIED!';
+            setTimeout(() => { btn.innerText = 'COPY CA'; }, 2000);
+        }
+    </script>
+</body>
+</html>
