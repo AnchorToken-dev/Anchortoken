@@ -48,7 +48,7 @@
             position: sticky; top: 0; z-index: 100;
         }
         .nav .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.5px; }
-        .nav .brand img { width: 34px; height: 34px; filter: drop-shadow(0 0 8px var(--neon-green)); }
+        .nav .brand img { width: 50px; height: auto; filter: drop-shadow(0 0 8px var(--neon-green)); }
         .nav .brand span { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
         .nav .links { display: flex; gap: 28px; }
         .nav .links a { color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
@@ -57,15 +57,28 @@
 
         /* --- Hero Section --- */
         .hero {
-            text-align: center; padding: 100px 20px 80px; position: relative;
+            text-align: center; padding: 80px 20px 60px; position: relative;
         }
         .hero::before {
             content: ''; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);
-            width: 350px; height: 350px; background: rgba(0, 255, 102, 0.15); filter: blur(120px);
+            width: 450px; height: 450px; background: rgba(0, 255, 102, 0.12); filter: blur(140px);
             border-radius: 50%; pointer-events: none;
         }
-        .hero .logo-wrap { margin-bottom: 24px; display: inline-block; position: relative; }
-        .hero .logo-wrap img { width: 140px; height: 140px; filter: drop-shadow(0 0 35px rgba(0, 255, 102, 0.4)); animation: float 4s ease-in-out infinite; }
+        
+        /* Expanded Hero Logo Dimensions */
+        .hero .logo-wrap {
+            margin-bottom: 24px;
+            display: inline-block;
+            max-width: 650px;
+            width: 90%;
+            position: relative;
+        }
+        .hero .logo-wrap img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 45px rgba(0, 255, 102, 0.35));
+            animation: float 4s ease-in-out infinite;
+        }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         .hero h1 {
