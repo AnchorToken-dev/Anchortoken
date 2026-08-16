@@ -57,7 +57,7 @@
 
         /* --- Hero Section --- */
         .hero {
-            text-align: center; padding: 80px 20px 60px; position: relative;
+            text-align: center; padding: 60px 20px 40px; position: relative;
         }
         .hero::before {
             content: ''; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);
@@ -65,7 +65,6 @@
             border-radius: 50%; pointer-events: none;
         }
         
-        /* Expanded Hero Logo Dimensions */
         .hero .logo-wrap {
             margin-bottom: 24px;
             display: inline-block;
@@ -96,6 +95,32 @@
         .hero .tagline .dot { width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
+        /* --- Countdown Timer Component --- */
+        .timer-container {
+            max-width: 620px; margin: 32px auto 0; background: var(--surface-card);
+            border: 1px solid var(--surface-border); border-radius: 20px; padding: 24px 20px;
+            backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .timer-title {
+            font-size: 0.85rem; color: var(--neon-green); font-weight: 800;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+        }
+        .timer-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+        }
+        .timer-box {
+            background: rgba(5, 7, 10, 0.8); border: 1px solid rgba(0, 255, 102, 0.2);
+            border-radius: 12px; padding: 12px 8px; text-align: center;
+        }
+        .timer-box .num {
+            font-family: var(--font-head); font-size: 2rem; font-weight: 800;
+            color: #ffffff; line-height: 1;
+        }
+        .timer-box .label {
+            font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase;
+            letter-spacing: 1px; margin-top: 6px; font-weight: 600;
+        }
+
         .hero .sub {
             max-width: 680px; margin: 24px auto 0; color: var(--text-sub);
             font-size: 1.15rem; line-height: 1.7; font-weight: 400;
@@ -103,8 +128,9 @@
         .hero .sub strong { color: #ffffff; font-weight: 600; }
 
         /* --- Contract Bar --- */
+        .contract-wrapper { max-width: 580px; margin: 28px auto 0; text-align: center; }
         .contract-bar {
-            max-width: 580px; margin: 32px auto 0; background: rgba(15, 23, 18, 0.8);
+            background: rgba(15, 23, 18, 0.8);
             border: 1px solid var(--surface-border); border-radius: 12px; padding: 12px 18px;
             display: flex; justify-content: space-between; align-items: center; gap: 12px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.4); backdrop-filter: blur(8px);
@@ -116,17 +142,44 @@
             transition: 0.2s; white-space: nowrap; font-family: var(--font-head);
         }
         .contract-bar button:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 12px rgba(0, 255, 102, 0.5); }
+        .solscan-link {
+            display: inline-block; margin-top: 10px; font-size: 0.82rem; color: var(--neon-green);
+            text-decoration: none; font-weight: 600; transition: 0.2s;
+        }
+        .solscan-link:hover { text-decoration: underline; text-shadow: 0 0 8px rgba(0, 255, 102, 0.5); }
 
         /* --- Layout Containers --- */
-        .container { max-width: 1040px; margin: 0 auto; padding: 70px 20px; }
+        .container { max-width: 1040px; margin: 0 auto; padding: 60px 20px; }
         .section-title {
             font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; text-transform: uppercase;
             text-align: center; margin-bottom: 48px; position: relative;
         }
         .section-title span { color: var(--neon-green); text-shadow: 0 0 12px rgba(0, 255, 102, 0.3); }
 
+        /* --- Tokenomics Section --- */
+        .tokenomics-card {
+            background: var(--surface-card); border: 1px solid var(--surface-border);
+            border-radius: 20px; padding: 36px 30px; backdrop-filter: blur(12px);
+        }
+        .tokenomics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+        .tokenomics-header h3 { font-size: 1.25rem; color: #fff; text-transform: uppercase; }
+        .tokenomics-header span { font-family: var(--font-head); color: var(--neon-green); font-weight: 700; }
+        
+        .bar-container {
+            width: 100%; height: 24px; background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px; overflow: hidden; display: flex; border: 1px solid var(--surface-border);
+        }
+        .bar-public { width: 100%; background: linear-gradient(90deg, #00ff66, #22c55e); height: 100%; }
+        .bar-dev { width: 0%; background: #ef4444; height: 100%; }
+
+        .tokenomics-legend { display: flex; justify-content: space-between; margin-top: 18px; font-size: 0.9rem; flex-wrap: wrap; gap: 12px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-green { background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+        .dot-red { background: #ef4444; }
+
         /* --- Stats Grid --- */
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
         @media (max-width: 768px) { .stats { grid-template-columns: 1fr; } }
         .stat {
             background: var(--surface-card); border: 1px solid var(--surface-border);
@@ -143,7 +196,7 @@
         .stat .num { font-size: 2.5rem; font-weight: 800; color: #fff; font-family: var(--font-head); line-height: 1; }
         .stat .label { font-size: 0.85rem; color: var(--neon-green); font-weight: 700; margin-top: 8px; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* --- Promise Banner --- */
+        /* --- Dev Commitment Banner --- */
         .promise {
             background: linear-gradient(135deg, rgba(0, 255, 102, 0.05) 0%, rgba(10, 15, 12, 0.8) 100%);
             border: 1px solid var(--surface-border); border-radius: 24px;
@@ -153,7 +206,7 @@
         .promise p { color: #d1d5db; font-size: 1.05rem; line-height: 1.8; }
         .promise p strong { color: #ffffff; }
 
-        /* --- Core Principles --- */
+        /* --- Principles --- */
         .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
         @media (max-width: 640px) { .principles { grid-template-columns: 1fr; } }
         .principle {
@@ -165,7 +218,7 @@
         .principle h4 { font-size: 1.15rem; margin-bottom: 8px; color: #fff; font-weight: 700; }
         .principle p { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; }
 
-        /* --- Modern Timeline Roadmap --- */
+        /* --- Roadmap --- */
         .roadmap { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
         .milestone {
             display: flex; gap: 24px; padding: 28px; background: var(--surface-card);
@@ -180,7 +233,25 @@
         .milestone h4 { font-size: 1.1rem; margin-bottom: 6px; color: #fff; }
         .milestone p { font-size: 0.92rem; color: var(--text-sub); }
 
-        /* --- Aggressive CTA --- */
+        /* --- Accordion FAQ Section --- */
+        .faq-list { display: flex; flex-direction: column; gap: 14px; }
+        .faq-item {
+            background: var(--surface-card); border: 1px solid var(--surface-border);
+            border-radius: 16px; overflow: hidden; transition: 0.2s;
+        }
+        .faq-question {
+            padding: 22px 28px; width: 100%; text-align: left; background: none; border: none;
+            color: #fff; font-family: var(--font-head); font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-question::after { content: '+'; font-size: 1.4rem; color: var(--neon-green); transition: 0.2s; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer {
+            padding: 0 28px 22px; color: var(--text-sub); font-size: 0.95rem; line-height: 1.7; display: none;
+        }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* --- CTA --- */
         .cta {
             text-align: center; background: radial-gradient(circle at center, rgba(0, 255, 102, 0.15) 0%, rgba(5, 7, 10, 0.95) 80%);
             border: 1px solid rgba(0, 255, 102, 0.3); border-radius: 28px;
@@ -219,10 +290,11 @@
     <nav class="nav">
         <div class="brand"><img src="anchor_logo.png" alt="Anchor logo"><span>ANCHOR</span></div>
         <div class="links">
-            <a href="#why">WHY</a>
+            <a href="#tokenomics">TOKENOMICS</a>
             <a href="#promise">PROMISE</a>
             <a href="#principles">PRINCIPLES</a>
             <a href="#roadmap">ROADMAP</a>
+            <a href="#faq">FAQ</a>
             <a href="#join">JOIN</a>
         </div>
     </nav>
@@ -231,40 +303,73 @@
         <div class="logo-wrap fade-in"><img src="anchor_logo.png" alt="Anchor logo"></div>
         <h1 class="fade-in d1">Anchor</h1>
         <div class="tagline fade-in d2"><span class="dot"></span> Fair Launch via Pump.fun</div>
+
+        <!-- Live Countdown Timer -->
+        <div class="timer-container fade-in d2">
+            <div class="timer-title" id="timerStatus">Official Launch Countdown — Sept 6 @ 12:00 PM EST</div>
+            <div class="timer-grid">
+                <div class="timer-box"><div class="num" id="days">00</div><div class="label">Days</div></div>
+                <div class="timer-box"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
+                <div class="timer-box"><div class="num" id="minutes">00</div><div class="label">Mins</div></div>
+                <div class="timer-box"><div class="num" id="seconds">00</div><div class="label">Secs</div></div>
+            </div>
+        </div>
+
         <p class="sub fade-in d3">
             Zero dev allocations. Zero insider snipes.<br>
             <strong>I take no team tokens, buy no early supply, and hold zero unfair advantage.</strong><br>
             Launched transparently using standard Pump.fun protocol tools.
         </p>
 
-        <!-- Interactive Contract Bar -->
-        <div class="contract-bar fade-in d3">
-            <span class="address" id="ca">Contract: 0x0000000000000000000000000000000000000000</span>
-            <button onclick="copyCA()">COPY CA</button>
+        <!-- Interactive Contract Bar & Solscan Verification -->
+        <div class="contract-wrapper fade-in d3">
+            <div class="contract-bar">
+                <span class="address" id="ca">Contract: Pending Deployment...</span>
+                <button onclick="copyCA()">COPY CA</button>
+            </div>
+            <a class="solscan-link" href="https://solscan.io/" target="_blank" id="solscanLink">🔍 Verify Deployer Wallet on Solscan</a>
         </div>
     </div>
 
-    <div class="container" id="why">
-        <h2 class="section-title fade-in">The <span>Launch Rules</span></h2>
+    <!-- Tokenomics Visual Breakdown -->
+    <div class="container" id="tokenomics">
+        <h2 class="section-title fade-in">Supply <span>Distribution</span></h2>
+        
+        <div class="tokenomics-card fade-in">
+            <div class="tokenomics-header">
+                <h3>Fair Launch Supply Split</h3>
+                <span>1,000,000,000 Total Tokens</span>
+            </div>
+            <div class="bar-container">
+                <div class="bar-public"></div>
+                <div class="bar-dev"></div>
+            </div>
+            <div class="tokenomics-legend">
+                <div class="legend-item"><span class="legend-dot dot-green"></span> 100% Public Bonding Curve (Pump.fun)</div>
+                <div class="legend-item"><span class="legend-dot dot-red"></span> 0% Dev / Team Allocation</div>
+            </div>
+        </div>
+
         <div class="stats fade-in">
             <div class="stat">
                 <div class="icon">🚫</div>
                 <div class="num">0%</div>
-                <div class="label">Dev Allocation</div>
+                <div class="label">Dev Team Bag</div>
             </div>
             <div class="stat">
                 <div class="icon">⏳</div>
                 <div class="num">100%</div>
-                <div class="label">Public First Entry</div>
+                <div class="label">Fair Public Access</div>
             </div>
             <div class="stat">
                 <div class="icon">🚀</div>
                 <div class="num">Pump.fun</div>
-                <div class="label">Fair Protocol Engine</div>
+                <div class="label">Protocol Engine</div>
             </div>
         </div>
     </div>
 
+    <!-- Dev Commitment -->
     <div class="container" id="promise">
         <h2 class="section-title fade-in">The <span>Dev Commitment</span></h2>
         <div class="promise fade-in">
@@ -285,6 +390,7 @@
         </div>
     </div>
 
+    <!-- Core Principles -->
     <div class="container" id="principles">
         <h2 class="section-title fade-in">Core <span>Principles</span></h2>
         <div class="principles fade-in">
@@ -295,6 +401,7 @@
         </div>
     </div>
 
+    <!-- Execution Roadmap -->
     <div class="container" id="roadmap">
         <h2 class="section-title fade-in">Execution <span>Roadmap</span></h2>
         <div class="roadmap fade-in">
@@ -317,6 +424,30 @@
         </div>
     </div>
 
+    <!-- Accordion FAQ Section -->
+    <div class="container" id="faq">
+        <h2 class="section-title fade-in">Frequently Asked <span>Questions</span></h2>
+        <div class="faq-list fade-in">
+            <div class="faq-item">
+                <button class="faq-question">When will the dev buy tokens?</button>
+                <div class="faq-answer">I will buy on the open bonding curve only after public traders have already begun buying. I am not taking a dev allocation and will not buy the first or second buy slot.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What are the token transaction taxes?</button>
+                <div class="faq-answer">0% tax. All transactions are standard Solana DEX trades executed via Pump.fun's standard protocol rules.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What happens when the bonding curve hits 100%?</button>
+                <div class="faq-answer">Once the bonding curve reaches completion on Pump.fun, the liquidity automatically migrates to Raydium, and the LP supply is automatically burned by the protocol.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How can I verify the deployer wallet?</button>
+                <div class="faq-answer">As soon as the token is live, the deployer wallet address and contract address will be pasted right in the Hero section above, linked straight to Solscan for full on-chain verification.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call To Action -->
     <div class="container" id="join">
         <div class="cta fade-in">
             <h2>Join Before Launch.</h2>
@@ -334,13 +465,60 @@
     </div>
 
     <script>
+        // Contract Copy Helper
         function copyCA() {
-            const caText = "0x0000000000000000000000000000000000000000";
+            const caText = document.getElementById('ca').innerText.replace('Contract: ', '');
             navigator.clipboard.writeText(caText);
             const btn = document.querySelector('.contract-bar button');
             btn.innerText = 'COPIED!';
             setTimeout(() => { btn.innerText = 'COPY CA'; }, 2000);
         }
-    </script>
-</body>
-</html>
+
+        // Interactive Accordion FAQ
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Launch Date Countdown Target: September 6 @ 12:00 PM EST (16:00:00 UTC)
+        const launchDate = new Date("2026-09-06T16:00:00Z").getTime();
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("timerStatus").innerText = "🚨 LAUNCH IS LIVE ON PUMP.FUN! 🚨";
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * I can't set timers, schedule events, or directly configure systems for you, but here is the exact information and breakdown you need to lock in that date and time:
+
+### Launch Details
+
+* **Target Date:** Sunday, September 6, 2026
+* **Target Time:** 12:00 PM EST (1:00 PM EDT)
+* **ISO 8601 Timestamp:** `2026-09-06T12:00:00-05:00` *(EST / UTC-5)*
+* **ISO 8601 Timestamp (Local EDT):** `2026-09-06T13:00:00-04:00` *(EDT / UTC-4)*
+
+---
+
+### Time Zone Check
+
+> **Note on Daylight Saving Time:** Early September falls under **Eastern Daylight Time (EDT, UTC-4)** in North America. 
+> * If you strictly mean **12:00 PM EST (UTC-5)**, it corresponds to **1:00 PM local time** on the US East Coast.
+> * If you meant **12:00 PM local East Coast time**, set your system or tool to **12:00 PM EDT**.
+
+---
+
+If you are setting this up in a specific platform or tool (like a website launch countdown, CRON job, email scheduler, or calendar event), let me know which one and I can give you the exact code or step-by-step setup!
