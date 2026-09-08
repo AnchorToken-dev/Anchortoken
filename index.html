@@ -98,39 +98,7 @@
         }
         .hero .tagline .dot { width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* Countdown Timer Component */
-        .timer-container {
-            max-width: 620px; margin: 32px auto 0; background: var(--surface-card);
-            border: 1px solid var(--surface-border); border-radius: 20px; padding: 24px 20px;
-            backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-        }
-        .timer-title {
-            font-size: 0.85rem; color: var(--neon-green); font-weight: 800;
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
-        }
-        .timer-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-        }
-        .timer-box {
-            background: rgba(5, 7, 10, 0.8); border: 1px solid rgba(0, 255, 102, 0.2);
-            border-radius: 12px; padding: 12px 8px; text-align: center;
-        }
-        .timer-box .num {
-            font-family: var(--font-head); font-size: 2rem; font-weight: 800;
-            color: #ffffff; line-height: 1;
-        }
-        .timer-box .label {
-            font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase;
-            letter-spacing: 1px; margin-top: 6px; font-weight: 600;
-        }
-
-        .hero .sub {
-            max-width: 680px; margin: 24px auto 0; color: var(--text-sub);
-            font-size: 1.15rem; line-height: 1.7; font-weight: 400;
-        }
-        .hero .sub strong { color: #ffffff; font-weight: 600; }
-
+        
         /* Contract Bar */
         .contract-wrapper { max-width: 580px; margin: 28px auto 0; text-align: center; }
         .contract-bar {
@@ -308,15 +276,9 @@
         <h1 class="fade-in d1">Anchor</h1>
         <div class="tagline fade-in d2"><span class="dot"></span> Fair Launch via Pump.fun</div>
 
-        <!-- Live Countdown Timer Component -->
-        <div class="timer-container fade-in d2">
-            <div class="timer-title" id="timerStatus">Official Launch Countdown — Sept 6 @ 12:00 PM EST</div>
-            <div class="timer-grid">
-                <div class="timer-box"><div class="num" id="days">00</div><div class="label">Days</div></div>
-                <div class="timer-box"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
-                <div class="timer-box"><div class="num" id="minutes">00</div><div class="label">Mins</div></div>
-                <div class="timer-box"><div class="num" id="seconds">00</div><div class="label">Secs</div></div>
-            </div>
+        <!-- Live Status -->
+    <div class="timer-container fade-in d2">
+    <div class="timer-title" id="timerStatus">🟢 LIVE — Launched Sept 6 via Pump.fun · CA below</div>
         </div>
 
         <p class="sub fade-in d3">
@@ -456,14 +418,15 @@
 
     <!-- Call To Action -->
     <div class="container" id="join">
-        <div class="cta fade-in">
-            <h2>Join Before Launch.</h2>
-            <p>Enter the community Discord for live launch alerts, CA posting, and open dev Q&A.</p>
-            <div class="buttons">
-                <a class="primary" href="https://discord.gg/8U9UycsDH" target="_blank">Join Discord</a>
-                <a class="ghost" href="https://x.com/Draco4226" target="_blank">Follow On X</a>
-            </div>
+    <div class="cta fade-in">
+        <h2>Join The Community.</h2>
+        <p>Chat in the Discord, follow the launch on X, or get updates in the Telegram — the dev is in all three.</p>
+        <div class="buttons">
+            <a class="primary" href="https://discord.gg/8U9UycsDH" target="_blank">Join Discord</a>
+            <a class="ghost" href="https://t.me/AnchorTokenVIP" target="_blank">Join Telegram</a>
+            <a class="ghost" href="https://x.com/Draco4226" target="_blank">Follow On X</a>
         </div>
+    </div>
     </div>
     <div class="uprock-note" style="margin-top:12px; font-size:0.82rem; color:#9aa3b2;">
     Built with UpRock — my devices earn UPT sharing idle bandwidth.
